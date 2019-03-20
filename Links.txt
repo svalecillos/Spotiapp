@@ -1,0 +1,3 @@
+https://developer.spotify.com/console/get-new-releases/
+
+https://accounts.spotify.com/api/token -> Para generar token
