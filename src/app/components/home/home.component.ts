@@ -11,16 +11,27 @@ export class HomeComponent implements OnInit {
 
   //paises: any[] = [];
   newRelease:any[] = [];
+  msjError: string;
+
+  error:boolean;
+  loading:boolean;
 
   constructor( /*private http: HttpClient*/ private spotify:SpotifyService) { 
     /*this.http.get('https://restcountries.eu/rest/v2/lang/es').subscribe( (respuesta : any) => {
       this.paises = respuesta;
       console.log(respuesta);
     });*/
+    this.error = false;
+    this.loading = true;
+
     this.spotify.getNewRelease()
         .subscribe( (data:any) => {
-          console.log(data);
-          this.newRelease = data.albums.items;
+          this.newRelease = data;
+          this.loading = false;
+        }, ( error) => {
+          this.loading = false;
+          this.error=true;
+          this.msjError = error.error.error.message;
         });
   }
 
